@@ -6,6 +6,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/route', (req, res) => {
+  console.log('Requisição no endpoint route!');
   res.send('Endpoint working!');
 })
 
