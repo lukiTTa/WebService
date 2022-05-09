@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
 
+app.set('trust proxy', true);
+
 app.get('/', (req, res) => {
   res.send('Hello from App Engine!');
 });
 
 app.get('/route', (req, res) => {
-  console.log('IP', req.remoteAddress);
+  console.log('IP', req.ips);
   res.send('Endpoint working!');
 })
 
