@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/route', (req, res) => {
-  console.log('Dados da requisição', req);
+  console.log('IP', req.ip);
   res.send('Endpoint working!');
 })
 
