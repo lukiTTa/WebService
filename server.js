@@ -6,7 +6,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/route', (req, res) => {
-  console.log('IP', req.ip);
+  console.log('IP', req.remoteAddress);
   res.send('Endpoint working!');
 })
 
