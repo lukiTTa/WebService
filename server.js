@@ -7,9 +7,10 @@ var app = express();
 app.use(busboy());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  res.send('Hello from App Engine!');
-});
+app.route('/')
+  .get((req, res) => {
+    res.send('Hello World!');
+  })
 
 /* ========================================================== 
 Create a Route (/upload) to handle the Form submission 
