@@ -40,6 +40,5 @@ app.route('/upload')
         });
     });
 
-var server = app.listen(3030, function() {
-    console.log('Listening on port %d', server.address().port);
-});
+var server = app.listen(process.env.PORT || 3030, 
+      () => console.log("Server is running..."));
