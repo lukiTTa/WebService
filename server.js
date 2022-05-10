@@ -1,36 +1,25 @@
-var express = require('express');    //Express Web Server 
-var busboy = require('connect-busboy'); //middleware for form/file upload
-var path = require('path');     //used for file path
-var fs = require('fs-extra');       //File System - for file manipulation
+const express = require('express');
 
-var app = express();
-app.use(busboy());
-app.use(express.static(path.join(__dirname, 'public')));
+const app = express();
+const multer = require("multer");
 
-app.route('/')
-  .get((req, res) => {
+const storage = multer.diskStorage({
+  destination: function (req, file, cb){
+    cb(null, "uploads/")
+  },
+  filename: function(req, file, cb){
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({storage});
+
+app.get("/", (req, res) => {
     res.send('Hello World!');
   })
 
-/* ========================================================== 
-Create a Route (/upload) to handle the Form submission 
-(handle POST requests to /upload)
-Express v4  Route definition
-============================================================ */
-app.route('/teste')
-  .get((req, res) => {
-    res.send('Test Working!');
-  })
-
-app.route('/upload')
-    .post(function (req, res, next) {
-
-        var fstream;
-        req.pipe(req.busboy);
-        req.busboy.on('file', function (fieldname, file, filename) {
-            console.log("Uploading: " + filename);
-        });
-    });
+app.post("/upload", upload.single("fileUpload"), (req, res) => {
+  res.send('Arquivo recebido!');
+})
     
-var  server = app.listen(process.env.PORT || 3030, 
-      () => console.log("Server is running..."));
+app.listen(process.env.PORT || 4040, () => console.log("Server is running..."));
