@@ -49,11 +49,15 @@ function changeFile(filename, replace){
     console.log(replace, newValue);
     
     //escrita do arquivo modificado
-    fs.writeFile(`uploads/${new Date() + filename}`, newValue, 'utf-8', function(err, data) {
+    fs.writeFile(`uploads/${filename}`, newValue, 'utf-8', function(err, data) {
         if (err) throw err;
         console.log(`Arquivo ${filename} alterado!`);
     })
   })
+}
+
+function delay(time) {
+  return new Promise(resolve => setTimeout(resolve, time));
 }
 
 //rota de requisição/alteração de arquivo
@@ -61,8 +65,12 @@ app.get('/file', function(req, res){
   let result = changeFile(req.query.filename, req.query.replace);
   if(result)
     res.send("Arquivo corrompido ou não encontrado!")
-  const file = `${__dirname}/uploads/${req.query.filename}`;
-  res.download(file);
+  else {
+    delay(3000).then(() => {
+      const file = `${__dirname}/uploads/${req.query.filename}`;
+      res.download(file);
+    });
+  }
 });
 
 //rota do cálculo da distância entre dois pontos
