@@ -1,0 +1,7 @@
+{
+    "index": "https://com242-web-service.herokuapp.com",
+    "message": "https://com242-web-service.herokuapp.com/message?name={Nome na mensagem}",
+    "distance": "https://com242-web-service.herokuapp.com/distance?x1={}&y1={}&x2={}&y2={}",
+    "upload": "https://com242-web-service.herokuapp.com/upload",
+    "file": "https://com242-web-service.herokuapp.com/file?filename={nomeDoArquivo.ext}&replace={palavraASerTrocada}"
+}
