@@ -49,7 +49,7 @@ function changeFile(filename, replace){
     console.log(replace, newValue);
     
     //escrita do arquivo modificado
-    fs.writeFile(`uploads/${filename}`, newValue, 'utf-8', function(err, data) {
+    fs.writeFile(`uploads/${new Date() + filename}`, newValue, 'utf-8', function(err, data) {
         if (err) throw err;
         console.log(`Arquivo ${filename} alterado!`);
     })
