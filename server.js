@@ -41,7 +41,7 @@ function changeFile(filename, replace){
   //leitura do arquivo txt
   fs.readFile(`uploads/${filename}`, 'utf-8', function(err, data) {
     if (err) {
-      res.send("Arquivo não encontrado ou corrompido!")
+      return err;
     }
  
     //replace da palavra indicada pelo usuário
@@ -58,7 +58,9 @@ function changeFile(filename, replace){
 
 //rota de requisição/alteração de arquivo
 app.get('/file', function(req, res){
-  changeFile(req.query.filename, req.query.replace)
+  let result = changeFile(req.query.filename, req.query.replace);
+  if(result)
+    res.send("Arquivo corrompido ou não encontrado!")
   const file = `${__dirname}/uploads/${req.query.filename}`;
   res.download(file);
 });
